@@ -134,14 +134,6 @@
             color: #000;
         }
         
-        footer {
-            margin-top: 100px;
-            padding-top: 40px;
-            border-top: 1px solid #e5e5e5;
-            font-size: 13px;
-            color: #999;
-        }
-        
         @media (max-width: 640px) {
             .map-container {
                 padding: 20px;
@@ -507,7 +499,7 @@
                         .attr('data-name', country.name)
                         .style('fill', '#7a9eb8')
                         .style('stroke', '#333')
-                        .style('stroke-width', '1')
+                        .style('stroke-width', '0.5')
                         .style('cursor', 'pointer')
                         .on('mouseenter', function(event) {
                             d3.select(this).style('fill', '#5a7e98');
