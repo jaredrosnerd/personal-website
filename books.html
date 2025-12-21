@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Movies - Jared Rosner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #000;
+        }
+        
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+        
+        .social-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .social-links a:not(:last-child)::after {
+            content: "•";
+            color: #ccc;
+            margin-left: 12px;
+        }
+        
+        .social-links a:hover {
+            color: #000;
+        }
+        
+        nav {
+            font-size: 14px;
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s ease;
+            position: relative;
+            bottom: -1px;
+        }
+        
+        nav a:hover {
+            color: #000;
+            background: #f5f5f5;
+        }
+        
+        nav a.active {
+            color: #000;
+            border-color: #e5e5e5;
+            background: #fff;
+        }
+        
+        .page-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #000;
+        }
+        
+        .section {
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #000;
+        }
+        
+        .grid {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+        
+        .item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .item-image {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .item-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 14px;
+            color: #2a2a2a;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 60px 20px 80px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .item {
+                flex: none;
+            }
+            
+            .item-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 2/3;
+            }
+            
+            .item-title {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Jared Rosner</h1>
+                <div class="social-links">
+                    <a href="https://www.blog.jros.com" target="_blank" rel="noopener noreferrer">Blog</a>
+                    <a href="https://www.x.com/jaredrosnerd" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="https://www.linkedin.com/in/jared-rosner/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#travel">Travel</a>
+                <a href="index.html#books" class="active">Books & Movies</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="section">
+                <h3 class="section-title">Favorite Books</h3>
+                <div class="grid">
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/diamond-age.jpg" alt="The Diamond Age">
+                        </div>
+                        <div class="item-title"><em>The Diamond Age</em><br>by Neal Stephenson</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/don-quixote.jpeg" alt="Don Quixote">
+                        </div>
+                        <div class="item-title"><em>Don Quixote</em><br>by Miguel de Cervantes</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/stories-of-your-life.jpg" alt="Stories of Your Life and Others">
+                        </div>
+                        <div class="item-title"><em>Stories of Your Life and Others</em><br>by Ted Chiang</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/irons-in-the-fire.jpeg" alt="Irons in the Fire">
+                        </div>
+                        <div class="item-title"><em>Irons in the Fire</em><br>by John McPhee</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/death-and-life.jpeg" alt="The Death and Life of Great American Cities">
+                        </div>
+                        <div class="item-title"><em>The Death and Life of Great American Cities</em><br>by Jane Jacobs</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Favorite Movies</h3>
+                <div class="grid">
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/Interstellar.jpg" alt="Interstellar">
+                        </div>
+                        <div class="item-title"><em>Interstellar</em></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/whiplash.jpg" alt="Whiplash">
+                        </div>
+                        <div class="item-title"><em>Whiplash</em></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/to-catch-a-thief.jpg" alt="To Catch a Thief">
+                        </div>
+                        <div class="item-title"><em>To Catch a Thief</em></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/mulholland-drive.png" alt="Mulholland Drive">
+                        </div>
+                        <div class="item-title"><em>Mulholland Drive</em></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="media-photos/puss-in-boots.jpg" alt="Puss in Boots: The Last Wish">
+                        </div>
+                        <div class="item-title"><em>Puss in Boots: The Last Wish</em></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

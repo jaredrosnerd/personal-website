@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jared Rosner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #000;
+        }
+        
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+        
+        .social-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .social-links a:not(:last-child)::after {
+            content: "•";
+            color: #ccc;
+            margin-left: 12px;
+        }
+        
+        .social-links a:hover {
+            color: #000;
+        }
+        
+        nav {
+            font-size: 14px;
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s ease;
+            position: relative;
+            bottom: -1px;
+        }
+        
+        nav a:hover {
+            color: #000;
+            background: #f5f5f5;
+        }
+        
+        nav a.active {
+            color: #000;
+            border-color: #e5e5e5;
+            background: #fff;
+        }
+        
+        .intro {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2a2a2a;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        /* Styles for collapsible fruit categories */
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .category {
+            padding: 2px 0;
+        }
+        
+        .category-header {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            color: #2a2a2a;
+            cursor: pointer;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s ease;
+            line-height: 1.8;
+        }
+        
+        .category-header:hover {
+            color: #666;
+        }
+        
+        .category-header::before {
+            content: "▸";
+            margin-right: 8px;
+            font-size: 14px;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        
+        .category-header.expanded::before {
+            transform: rotate(90deg);
+        }
+        
+        .category-content {
+            display: none;
+            margin-top: 4px;
+            padding-left: 20px;
+        }
+        
+        .category-content.expanded {
+            display: block;
+        }
+        
+        .list-item {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            color: #2a2a2a;
+            padding: 2px 0;
+            line-height: 1.8;
+        }
+        
+        .list-item::before {
+            content: "•";
+            color: #999;
+            margin-right: 12px;
+        }
+        
+        /* Reading page styles */
+        .section {
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #000;
+        }
+        
+        .grid {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+        
+        .item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .item-image {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .item-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 14px;
+            color: #2a2a2a;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        @media (max-width: 640px) {
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .item {
+                flex: none;
+            }
+            
+            .item-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 2/3;
+            }
+            
+            .item-title {
+                width: 100%;
+            }
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .links a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 15px;
+            display: flex;
+            align-items: baseline;
+            transition: color 0.2s ease;
+        }
+        
+        .links a:hover {
+            color: #666;
+        }
+        
+        .links a::before {
+            content: "→";
+            margin-right: 12px;
+            color: #ccc;
+            font-size: 14px;
+        }
+        
+        .link-description {
+            font-size: 14px;
+            color: #666;
+            margin-left: 24px;
+            margin-top: 4px;
+        }
+        
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 13px;
+            color: #999;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 60px 20px 80px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .intro {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Jared Rosner</h1>
+                <div class="social-links">
+                    <a href="https://www.blog.jros.com" target="_blank" rel="noopener noreferrer">Blog</a>
+                    <a href="https://www.x.com/jaredrosnerd" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="https://www.linkedin.com/in/jared-rosner/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
+            <nav>
+                <a href="#home" class="active" onclick="navigate(event, 'home')">Home</a>
+                <a href="#travel" onclick="navigate(event, 'travel')">Travel</a>
+                <a href="#books" onclick="navigate(event, 'books')">Books & Movies</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="intro">
+                Currently working with <a href="https://eladgil.com" target="_blank" rel="noopener noreferrer" style="color: #1a1a1a; text-decoration: underline; text-decoration-color: #ccc; transition: text-decoration-color 0.2s ease;">Elad Gil</a> to help and invest in technology startups.
+            </div>
+            
+            <div class="intro">
+                Previously, I was at Bain & Co and IVP. I studied computer science, business, data science, and environmental science at UC Berkeley, and later left the Stanford MBA program to continue startup investing.
+            </div>
+            
+            <div class="intro">
+                Along the way, I've enjoyed a few side quests:
+                <ul style="margin-top: 12px; padding-left: 20px;">
+                    <li style="margin-bottom: 0px;">Volunteering with the San Francisco Suicide Prevention Hotline.</li>
+                    <li style="margin-bottom: 0px;">Briefly appearing as an extra in <i>Oppenheimer</i></li>
+                    <li style="margin-bottom: 0px;">Organizing a 300-person “Quarter Life Prom” at the Exploratorium.</li>
+                    <!--<li style="margin-bottom: 0px;">Lived at a monastery for a week, which requried 3am wake-ups and 6 hours of meditation per day.</li>-->
+                    <li style="margin-bottom: 0px;">Trying as many new <a href="#fruits" onclick="navigate(event, 'fruits')" style="color: #1a1a1a; text-decoration: underline; text-decoration-color: #ccc; transition: text-decoration-color 0.2s ease;">fruits</a> and <a href="#meats" onclick="navigate(event, 'meats')" style="color: #1a1a1a; text-decoration: underline; text-decoration-color: #ccc; transition: text-decoration-color 0.2s ease;">meats</a> as possible.</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Store original home content
+        const homeContent = document.querySelector('main').innerHTML;
+        
+        // Client-side navigation
+        function navigate(event, page) {
+            event.preventDefault();
+            
+            // Update active nav link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            if (event.target.tagName === 'A') {
+                event.target.classList.add('active');
+            }
+            
+            // Update URL hash
+            window.location.hash = page;
+            
+            // Load content
+            loadPage(page);
+        }
+        
+        async function loadPage(page) {
+            const main = document.querySelector('main');
+            
+            try {
+                if (page === 'home') {
+                    main.innerHTML = homeContent;
+                } else if (page === 'travel') {
+                    // For travel page, just redirect since it has complex map functionality
+                    window.location.href = 'travel.html';
+                    return;
+                } else if (page === 'books') {
+                    const response = await fetch('books.html');
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const content = doc.querySelector('main').innerHTML;
+                    main.innerHTML = content;
+                } else if (page === 'fruits') {
+                    const response = await fetch('fruits.html');
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const content = doc.querySelector('main').innerHTML;
+                    main.innerHTML = '<a href="#home" onclick="navigate(event, \'home\')" style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s ease;" onmouseover="this.style.color=\'#000\'" onmouseout="this.style.color=\'#666\'">← Back to Home</a>' + content;
+                    
+                    // Add toggle function for collapsible categories
+                    window.toggleCategory = function(header) {
+                        const content = header.nextElementSibling;
+                        const isExpanded = content.classList.contains('expanded');
+                        
+                        if (isExpanded) {
+                            content.classList.remove('expanded');
+                            header.classList.remove('expanded');
+                        } else {
+                            content.classList.add('expanded');
+                            header.classList.add('expanded');
+                        }
+                    };
+                } else if (page === 'meats') {
+                    const response = await fetch('meats.html');
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const content = doc.querySelector('main').innerHTML;
+                    main.innerHTML = '<a href="#home" onclick="navigate(event, \'home\')" style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; transition: color 0.2s ease;" onmouseover="this.style.color=\'#000\'" onmouseout="this.style.color=\'#666\'">← Back to Home</a>' + content;
+                    
+                    // Add toggle function for collapsible categories
+                    window.toggleCategory = function(header) {
+                        const content = header.nextElementSibling;
+                        const isExpanded = content.classList.contains('expanded');
+                        
+                        if (isExpanded) {
+                            content.classList.remove('expanded');
+                            header.classList.remove('expanded');
+                        } else {
+                            content.classList.add('expanded');
+                            header.classList.add('expanded');
+                        }
+                    };
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            } catch (error) {
+                console.error('Error loading page:', error);
+                main.innerHTML = '<div class="intro">Error loading content. Please access this site via http://localhost:8000 for client-side navigation to work.</div>';
+            }
+        }
+        
+        // Handle browser back/forward
+        window.addEventListener('hashchange', () => {
+            const page = window.location.hash.slice(1) || 'home';
+            loadPage(page);
+            
+            // Update active nav
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + page) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Load initial page based on hash
+        window.addEventListener('DOMContentLoaded', () => {
+            const page = window.location.hash.slice(1) || 'home';
+            if (page && page !== 'home') {
+                loadPage(page);
+            }
+            
+            // Set active nav on initial load
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + page) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

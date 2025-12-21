@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meats - Jared Rosner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #000;
+        }
+        
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+        
+        .social-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .social-links a:not(:last-child)::after {
+            content: "•";
+            color: #ccc;
+            margin-left: 12px;
+        }
+        
+        .social-links a:hover {
+            color: #000;
+        }
+        
+        nav {
+            font-size: 14px;
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s ease;
+            position: relative;
+            bottom: -1px;
+        }
+        
+        nav a:hover {
+            color: #000;
+            background: #f5f5f5;
+        }
+        
+        nav a.active {
+            color: #000;
+            border-color: #e5e5e5;
+            background: #fff;
+        }
+        
+        .page-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #000;
+        }
+        
+        .intro {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2a2a2a;
+            margin-bottom: 30px;
+        }
+        
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .category {
+            padding: 2px 0;
+        }
+        
+        .category-header {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            color: #2a2a2a;
+            cursor: pointer;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s ease;
+            line-height: 1.8;
+        }
+        
+        .category-header:hover {
+            color: #666;
+        }
+        
+        .category-header::before {
+            content: "▸";
+            margin-right: 8px;
+            font-size: 14px;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        
+        .category-header.expanded::before {
+            transform: rotate(90deg);
+        }
+        
+        .category-content {
+            display: none;
+            padding-left: 20px;
+            margin-top: 4px;
+        }
+        
+        .category-content.expanded {
+            display: block;
+        }
+        
+        .list-item {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            color: #2a2a2a;
+            padding: 2px 0;
+            line-height: 1.8;
+        }
+        
+        .list-item::before {
+            content: "•";
+            color: #999;
+            margin-right: 12px;
+        }
+        
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 13px;
+            color: #999;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 60px 20px 80px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Jared Rosner</h1>
+                <div class="social-links">
+                    <a href="https://www.blog.jros.com" target="_blank" rel="noopener noreferrer">Blog</a>
+                    <a href="https://www.x.com/jaredrosnerd" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="https://www.linkedin.com/in/jared-rosner/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#travel">Travel</a>
+                <a href="index.html#reading">Reading</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2 class="page-title">Meats I've Tried</h2>
+            
+            <div class="intro">
+                I've eaten meats across the major animal groups:
+            </div>
+            
+            <div class="category-container">
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Mammals
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Bison</div>
+                        <div class="list-item">Boar</div>
+                        <div class="list-item">Cow</div>
+                        <div class="list-item">Deer</div>
+                        <div class="list-item">Eland</div>
+                        <div class="list-item">Elk</div>
+                        <div class="list-item">Goat</div>
+                        <div class="list-item">Horse</div>
+                        <div class="list-item">Impala</div>
+                        <div class="list-item">Kudu</div>
+                        <div class="list-item">Oryx</div>
+                        <div class="list-item">Pig</div>
+                        <div class="list-item">Rabbit</div>
+                        <div class="list-item">Sheep</div>
+                        <div class="list-item">Springbok</div>
+                        <div class="list-item">Water Buffalo</div>
+                        <div class="list-item">Wildebeest</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Birds
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Chicken</div>
+                        <div class="list-item">Duck</div>
+                        <div class="list-item">Goose</div>
+                        <div class="list-item">Ostrich</div>
+                        <div class="list-item">Pheasant</div>
+                        <div class="list-item">Quail</div>
+                        <div class="list-item">Squab</div>
+                        <div class="list-item">Turkey</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Reptiles
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Alligator</div>
+                        <div class="list-item">Crocodile</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Amphibians
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Frog</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Fish
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Anchovy</div>
+                        <div class="list-item">Barracuda</div>
+                        <div class="list-item">Bass</div>
+                        <div class="list-item">Bream</div>
+                        <div class="list-item">Butterfish</div>
+                        <div class="list-item">Cod</div>
+                        <div class="list-item">Eel</div>
+                        <div class="list-item">Flounder</div>
+                        <div class="list-item">Hake</div>
+                        <div class="list-item">Halibut</div>
+                        <div class="list-item">Mackerel</div>
+                        <div class="list-item">Mahi Mahi</div>
+                        <div class="list-item">Piranha</div>
+                        <div class="list-item">Piraracu</div>
+                        <div class="list-item">Red Snapper</div>
+                        <div class="list-item">Salmon</div>
+                        <div class="list-item">Sardine</div>
+                        <div class="list-item">Shark</div>
+                        <div class="list-item">Sole</div>
+                        <div class="list-item">Swordfish</div>
+                        <div class="list-item">Tambaqui</div>
+                        <div class="list-item">Tilapia</div>
+                        <div class="list-item">Trout</div>
+                        <div class="list-item">Bluefin Tuna</div>
+                        <div class="list-item">Yellowfin Tuna</div>
+                        <div class="list-item">Yellowtail</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Mollusks
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Abalone</div>
+                        <div class="list-item">Mussel</div>
+                        <div class="list-item">Octopus</div>
+                        <div class="list-item">Oyster</div>
+                        <div class="list-item">Quahog Clam</div>
+                        <div class="list-item">Razor Clam</div>
+                        <div class="list-item">Scallop</div>
+                        <div class="list-item">Snail</div>
+                        <div class="list-item">Squid</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Crustaceans
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Spiny Lobster</div>
+                        <div class="list-item">Crawfish</div>
+                        <div class="list-item">Dungeness Crab</div>
+                        <div class="list-item">Clawed Lobster</div>
+                        <div class="list-item">River Prawn</div>
+                        <div class="list-item">Shrimp</div>
+                        <div class="list-item">Tiger Prawns</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Echinoderms
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Sea Cucumber</div>
+                        <div class="list-item">Urchin</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Insects
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Coconut Larva</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+    </div>
+    
+    <script>
+        function toggleCategory(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = content.classList.contains('expanded');
+            
+            if (isExpanded) {
+                content.classList.remove('expanded');
+                header.classList.remove('expanded');
+            } else {
+                content.classList.add('expanded');
+                header.classList.add('expanded');
+            }
+        }
+    </script>
+</body>
+</html>

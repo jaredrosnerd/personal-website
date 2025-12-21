@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruits - Jared Rosner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #000;
+        }
+        
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+        
+        .social-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .social-links a:not(:last-child)::after {
+            content: "•";
+            color: #ccc;
+            margin-left: 12px;
+        }
+        
+        .social-links a:hover {
+            color: #000;
+        }
+        
+        nav {
+            font-size: 14px;
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s ease;
+            position: relative;
+            bottom: -1px;
+        }
+        
+        nav a:hover {
+            color: #000;
+            background: #f5f5f5;
+        }
+        
+        nav a.active {
+            color: #000;
+            border-color: #e5e5e5;
+            background: #fff;
+        }
+        
+        .page-title {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #000;
+        }
+        
+        .intro {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2a2a2a;
+            margin-bottom: 30px;
+        }
+        
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .category {
+            padding: 2px 0;
+        }
+        
+        .category-header {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            color: #2a2a2a;
+            cursor: pointer;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s ease;
+            line-height: 1.8;
+        }
+        
+        
+        .category-header:hover {
+            color: #666;
+        }
+        
+        .category-header::before {
+            content: "▸";
+            margin-right: 8px;
+            font-size: 14px;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        
+        .category-header.expanded::before {
+            transform: rotate(90deg);
+        }
+        
+        .category-content {
+            display: none;
+            margin-top: 4px;
+            padding-left: 20px;
+        }
+        
+        .category-content.expanded {
+            display: block;
+        }
+        
+        .list-item {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            color: #2a2a2a;
+            padding: 2px 0;
+            line-height: 1.8;
+        }
+        
+        .list-item::before {
+            content: "•";
+            color: #999;
+            margin-right: 12px;
+        }
+        
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 13px;
+            color: #999;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 60px 20px 80px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Jared Rosner</h1>
+                <div class="social-links">
+                    <a href="https://www.blog.jros.com" target="_blank" rel="noopener noreferrer">Blog</a>
+                    <a href="https://www.x.com/jaredrosnerd" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="https://www.linkedin.com/in/jared-rosner/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#travel">Travel</a>
+                <a href="index.html#reading">Reading</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2 class="page-title">Fruits I've Tried</h2>
+            
+            <div class="intro">
+                I've eaten fruits across the major evolutionary lineages:
+            </div>
+            
+            <div class="category-container">
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Rosales: Temperate fruit trees and shrubs with familiar orchard fruits and berries.
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Apple</div>
+                        <div class="list-item">Apricot</div>
+                        <div class="list-item">Blackberry</div>
+                        <div class="list-item">Boysenberry</div>
+                        <div class="list-item">Cherry</div>
+                        <div class="list-item">Fig</div>
+                        <div class="list-item">Loquat</div>
+                        <div class="list-item">Marionberry</div>
+                        <div class="list-item">Nectarine</div>
+                        <div class="list-item">Peach</div>
+                        <div class="list-item">Pear</div>
+                        <div class="list-item">Plum</div>
+                        <div class="list-item">Raspberry</div>
+                        <div class="list-item">Saskatoon Berry</div>
+                        <div class="list-item">Strawberry</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Fabids: Mostly tropical trees and vines producing many large, soft fruits.
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Cantaloupe</div>
+                        <div class="list-item">Cashew Fruit</div>
+                        <div class="list-item">Chamoe Melon</div>
+                        <div class="list-item">Cucumber</div>
+                        <div class="list-item">Grape</div>
+                        <div class="list-item">Honey Dew</div>
+                        <div class="list-item">Jackfruit</div>
+                        <div class="list-item">Mango</div>
+                        <div class="list-item">Muskmelon</div>
+                        <div class="list-item">Piel de Sapo / Santa Claus Melon</div>
+                        <div class="list-item">Pumpkin</div>
+                        <div class="list-item">Tamarind</div>
+                        <div class="list-item">Watermelon</div>
+                        <div class="list-item">Wintermelon</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Malvids: Fruits with aromatic oils, thicker skins, or tougher protective structures.
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Baobab</div>
+                        <div class="list-item">Clementine</div>
+                        <div class="list-item">Grapefruit</div>
+                        <div class="list-item">Guava</div>
+                        <div class="list-item">Kumquat</div>
+                        <div class="list-item">Lemon</div>
+                        <div class="list-item">Lime</div>
+                        <div class="list-item">Longan</div>
+                        <div class="list-item">Lychee</div>
+                        <div class="list-item">Okra</div>
+                        <div class="list-item">Orange</div>
+                        <div class="list-item">Passionfruit</div>
+                        <div class="list-item">Pomelo</div>
+                        <div class="list-item">Pomegranate</div>
+                        <div class="list-item">Tangerine</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Asterids: Fruits shaped by shared flower structure, often sharper or more complex.
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Blueberry</div>
+                        <div class="list-item">Cranberry</div>
+                        <div class="list-item">Huckleberry</div>
+                        <div class="list-item">Kiwi</div>
+                        <div class="list-item">Pepper</div>
+                        <div class="list-item">Persimmon</div>
+                        <div class="list-item">Starfruit</div>
+                        <div class="list-item">Tomato</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Basal fruits: Fruits from older plant lineages with unusual shapes, textures, or flavors.
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Abeel</div>
+                        <div class="list-item">Amla</div>
+                        <div class="list-item">Avocado</div>
+                        <div class="list-item">Dragonfruit</div>
+                        <div class="list-item">Durian</div>
+                        <div class="list-item">Eembe</div>
+                        <div class="list-item">Jujube</div>
+                        <div class="list-item">Mangosteen</div>
+                        <div class="list-item">Papaya</div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        Monocots: Fruits from a separate plant lineage, often large, fibrous, or palm-based.
+                    </div>
+                    <div class="category-content">
+                        <div class="list-item">Banana</div>
+                        <div class="list-item">Butia / Jelly Palm</div>
+                        <div class="list-item">Coconut</div>
+                        <div class="list-item">Date</div>
+                        <div class="list-item">Pineapple</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <script>
+            function toggleCategory(header) {
+                const content = header.nextElementSibling;
+                const isExpanded = content.classList.contains('expanded');
+                
+                if (isExpanded) {
+                    content.classList.remove('expanded');
+                    header.classList.remove('expanded');
+                } else {
+                    content.classList.add('expanded');
+                    header.classList.add('expanded');
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

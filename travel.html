@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel - Jared Rosner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+        
+        .map-container {
+            margin: 40px 0;
+            padding: 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #000;
+        }
+        
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+        
+        .social-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .social-links a:not(:last-child)::after {
+            content: "•";
+            color: #ccc;
+            margin-left: 12px;
+        }
+        
+        .social-links a:hover {
+            color: #000;
+        }
+        
+        nav {
+            font-size: 14px;
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s ease;
+            position: relative;
+            bottom: -1px;
+        }
+        
+        nav a:hover {
+            color: #000;
+            background: #f5f5f5;
+        }
+        
+        nav a.active {
+            color: #000;
+            border-color: #e5e5e5;
+            background: #fff;
+        }
+        
+        
+        #world-map {
+            width: 100%;
+            height: auto;
+            display: block;
+            cursor: grab;
+        }
+        
+        #world-map:active {
+            cursor: grabbing;
+        }
+        
+        .country, .state {
+            fill: #f5f5f5;
+            stroke: #333;
+            stroke-width: 0.5;
+            cursor: pointer;
+            will-change: fill;
+        }
+        
+        .country:hover, .state:hover {
+            fill: #d4d4d4;
+        }
+        
+        .country.visited, .state.visited {
+            fill: #7a9eb8;
+        }
+        
+        .country.visited:hover, .state.visited:hover {
+            fill: #5a7e98;
+        }
+        
+        .tooltip {
+            position: fixed;
+            background: #000;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 1000;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+        
+        .tooltip.show {
+            opacity: 1;
+        }
+        
+        .tooltip .country-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .tooltip .country-story {
+            font-size: 12px;
+            color: #ddd;
+        }
+        
+        .tooltip .country-photo {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-top: 8px;
+            border-radius: 2px;
+            display: block;
+        }
+        
+        .story-panel {
+            margin-top: 40px;
+            padding: 32px;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .story-panel.show {
+            opacity: 1;
+            max-height: 500px;
+        }
+        
+        .story-panel h3 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #000;
+        }
+        
+        .story-panel p {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2a2a2a;
+        }
+        
+        .story-panel .close-btn {
+            float: right;
+            color: #999;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        
+        .story-panel .close-btn:hover {
+            color: #000;
+        }
+        
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 13px;
+            color: #999;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 60px 20px 80px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .map-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Jared Rosner</h1>
+                <div class="social-links">
+                    <a href="https://www.blog.jros.com" target="_blank" rel="noopener noreferrer">Blog</a>
+                    <a href="https://www.x.com/jaredrosnerd" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="https://www.linkedin.com/in/jared-rosner/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#travel" class="active">Travel</a>
+                <a href="index.html#books">Books & Movies</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="map-container">
+                <div id="map-wrapper"></div>
+            </div>
+            
+            <div class="story-panel" id="story-panel">
+                <span class="close-btn" onclick="closeStory()">×</span>
+                <h3 id="story-title"></h3>
+                <p id="story-text"></p>
+            </div>
+        </main>
+        
+        <div class="tooltip" id="tooltip"></div>
+    </div>
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <script>
+        // Travel data - add your countries and stories here
+        // Map country names from the atlas to our data structure
+        const countryNameMap = {
+            'Macedonia': 'North Macedonia',
+            'Czech Republic': 'Czechia',
+            'Bosnia and Herzegovina': 'Bosnia and Herz.'
+        };
+        
+        const visitedPlaces = {
+            countries: {
+                "Afghanistan": { visited: false, story: "" },
+                "Albania": {
+                     visited: true, 
+                     story: "Traveled the Albanian Alps by foot, where road-inaccessible villages made everything fresh, from lamb to cheese to honey.",
+                     photo: "travel-photos/albania.jpeg"
+                },
+                "Algeria": { visited: false, story: "" },
+                "Andorra": { visited: true, story: "Stunning pyrenees views during a Spanish roadtrip.", photo: "travel-photos/andorra.jpeg" },
+                "Angola": { visited: false, story: "" },
+                "Argentina": { visited: false, story: "" },
+                "Armenia": { visited: false, story: "" },
+                "Australia": { visited: false, story: "" },
+                "Austria": { visited: true, story: "My first solo-trip started in Vienna." },
+                "Azerbaijan": { visited: false, story: "" },
+                "Bahamas": { visited: true, story: "Visited as a child" },
+                "Bahrain": { visited: true, story: "Peaceful desert nation on the water with some beautiful old maps.", photo: "travel-photos/bahrain.jpeg" },
+                "Bangladesh": { visited: false, story: "" },
+                "Belarus": { visited: false, story: "" },
+                "Belgium": { visited: false, story: "" },
+                "Belize": { visited: false, story: "" },
+                "Benin": { visited: false, story: "" },
+                "Bhutan": { visited: false, story: "" },
+                "Bolivia": { visited: false, story: "" },
+                "Bosnia and Herz.": { visited: true, story: "People train to jump from that bridge in Mostar, though consequences of bad form can be devastating.", photo: "travel-photos/bosnia.jpeg" },
+                "Botswana": { visited: true, story: "Hundreds of elephants in Chobe, Okavango Delta, and Kalahari.", photo: "travel-photos/botswana.jpeg" },
+                "Brazil": { visited: true, story: "Ate piranhas in the Amazon, oh how the tables have turned.", photo: "travel-photos/brazil.jpeg" },
+                "Brunei": { visited: false, story: "" },
+                "Bulgaria": { visited: false, story: "" },
+                "Burkina Faso": { visited: false, story: "" },
+                "Burundi": { visited: false, story: "" },
+                "Cambodia": { visited: true, story: "Ta Prom showed me the futility of man's struggle to build something enduring.", photo: "travel-photos/cambodia.jpeg" },
+                "Cameroon": { visited: false, story: "" },
+                "Canada": { visited: true, story: "Le petit-déjeuner est délicieux à Montréal." },
+                "Central African Republic": { visited: false, story: "" },
+                "Chad": { visited: false, story: "" },
+                "Chile": { visited: false, story: "" },
+                "China": { visited: false, story: "" },
+                "Colombia": { visited: true, story: "Spent a couple days in the middle of the ocean two hours from Cartegena by boat.", photo: "travel-photos/colombia.png" },
+                "Costa Rica": { visited: true, story: "Ziplining through the jungle on a Spring Break trip." },
+                "Croatia": { visited: true, story: "Saw more waterfalls in Croatia than in all the rest of the world.", photo: "travel-photos/croatia.jpeg" },
+                "Cuba": { visited: false, story: "" },
+                "Cyprus": { visited: false, story: "" },
+                "Czechia": { visited: true, story: "Prague has more absinthe shops per square mile than anywhere I've ever seen." },
+                "Denmark": { visited: false, story: "" },
+                "Dominican Republic": { visited: false, story: "" },
+                "Ecuador": { visited: false, story: "" },
+                "Egypt": { visited: false, story: "" },
+                "El Salvador": { visited: false, story: "" },
+                "Estonia": { visited: false, story: "" },
+                "Ethiopia": { visited: false, story: "" },
+                "Fiji": { visited: false, story: "" },
+                "Finland": { visited: false, story: "" },
+                "France": { visited: true, story: "Visited scenes from Hitchcock's 'To Catch a Thief,' and can see why Grace Kelly chose to stay.", photo: "travel-photos/france.jpeg" },
+                "Gabon": { visited: false, story: "" },
+                "Georgia": { visited: false, story: "" },
+                "Germany": { visited: false, story: "" },
+                "Ghana": { visited: false, story: "" },
+                "Greece": { visited: true, story: "Toured around Athens by a local.", photo: "travel-photos/greece.jpeg" },
+                "Guatemala": { visited: false, story: "" },
+                "Guinea": { visited: false, story: "" },
+                "Haiti": { visited: false, story: "" },
+                "Honduras": { visited: false, story: "" },
+                "Hungary": { visited: true, story: "Learned that Buda and Pest are two different cities." },
+                "Iceland": {
+                    visited: true,
+                    story: "Ice crystal beaches, glaciers, waterfalls, and the Blue Lagoon. Reikjavic food scene stands out.",
+                    photo: "travel-photos/iceland.jpeg"
+                },
+                "India": { visited: true, story: "Nothing beats an Indian wedding.", photo: "travel-photos/india.jpeg" },
+                "Indonesia": { visited: false, story: "" },
+                "Iran": { visited: false, story: "" },
+                "Iraq": { visited: false, story: "" },
+                "Ireland": { visited: false, story: "" },
+                "Israel": { visited: true, story: "History never felt so real.", photo: "travel-photos/israel.jpeg" },
+                "Italy": { visited: true, story: "Felt good to eat pasta and sip wine after hiking 30 miles in Slovenia.", photo: "travel-photos/italy.jpeg" },
+                "Jamaica": { visited: false, story: "" },
+                "Japan": {visited: false, story: "",},
+                "Jordan": { visited: true, story: "Went sandboarding and got my head stuck in a dune.", photo: "travel-photos/jordan.jpeg" },
+                "Kazakhstan": { visited: false, story: "" },
+                "Kenya": { visited: true, story: "Visited friends in Nairobi.", photo: "travel-photos/kenya.jpeg" },
+                "Kosovo": { visited: true, story: "Bill Clinton is the national hero of Kosovo.", photo: "travel-photos/kosovo.png" },
+                "Kuwait": { visited: false, story: "" },
+                "Kyrgyzstan": { visited: false, story: "" },
+                "Laos": { visited: true, story: "Lived in this treehouse for a couple days. Luang Prabong might be my favorite town ever.", photo: "travel-photos/laos.jpeg" },
+                "Latvia": { visited: false, story: "" },
+                "Lebanon": { visited: false, story: "" },
+                "Lesotho": { visited: false, story: "" },
+                "Liberia": { visited: false, story: "" },
+                "Libya": { visited: false, story: "" },
+                "Lithuania": { visited: false, story: "" },
+                "Luxembourg": { visited: false, story: "" },
+                "Madagascar": { visited: true, story: "I found King Julian.", photo: "travel-photos/madagascar.jpeg" },
+                "Malawi": { visited: false, story: "" },
+                "Malaysia": { visited: false, story: "" },
+                "Mali": { visited: false, story: "" },
+                "Malta": { visited: false, story: "" },
+                "Mauritania": { visited: false, story: "" },
+                "Mexico": { visited: true, story: "Top tier tacos." },
+                "Moldova": { visited: false, story: "" },
+                "Monaco": { visited: true, story: "Stopped by on my bike trip.", photo: "travel-photos/monaco.jpeg" },
+                "Mongolia": { visited: false, story: "" },
+                "Montenegro": { visited: true, story: "Met some van lifers in Kodor and stayed lived them for a few days.", photo: "travel-photos/montenegro.jpeg" },
+                "Morocco": { visited: false, story: "" },
+                "Mozambique": { visited: false, story: "" },
+                "Myanmar": { visited: false, story: "" },
+                "Namibia": { visited: true, story: "Swakupmund dunes and kayaking with baby seals, thanks for the trip MJ!", photo: "travel-photos/namibia.jpeg" },
+                "Nepal": { visited: false, story: "" },
+                "Netherlands": { visited: false, story: "" },
+                "New Zealand": { visited: false, story: "" },
+                "Nicaragua": { visited: false, story: "" },
+                "Niger": { visited: false, story: "" },
+                "Nigeria": { visited: false, story: "" },
+                "North Korea": { visited: false, story: "" },
+                "North Macedonia": { visited: true, story: "Encountered a horse and dog duo during a crazy Matka escapade.", photo: "travel-photos/north_macedonia.png" },
+                "Norway": { visited: false, story: "" },
+                "Oman": { visited: false, story: "" },
+                "Pakistan": { visited: false, story: "" },
+                "Palestine": {visited: true, story: "Passed through the West Bank on my way to Jordan"},
+                "Panama": { visited: false, story: "" },
+                "Papua New Guinea": { visited: false, story: "" },
+                "Paraguay": { visited: false, story: "" },
+                "Peru": { visited: false, story: "" },
+                "Philippines": { visited: false, story: "" },
+                "Poland": { visited: false, story: "" },
+                "Portugal": { visited: true, story: "Sintra reminds me of the fairyland from Shrek." },
+                "Qatar": { visited: true, story: "Fun fact, peregrine falcon used to be my favorite animal. A falconer gifted me his falcon's cap.", photo: "travel-photos/qatar.jpeg" },
+                "Romania": { visited: false, story: "" },
+                "Russia": { visited: false, story: "" },
+                "Rwanda": { visited: false, story: "" },
+                "Saudi Arabia": { visited: false, story: "" },
+                "Senegal": { visited: false, story: "" },
+                "Serbia": { visited: false, story: "" },
+                "Sierra Leone": { visited: false, story: "" },
+                "Singapore": { visited: true, story: "I wish hawker stands were everywhere.", photo: "travel-photos/singapore.jpeg" },
+                "Slovakia": { visited: false, story: "" },
+                "Slovenia": { visited: true, story: "Accidentally crossed the border to Austria on a 30 mile hike near Bled. Also where can I get struklji in the US?", photo: "travel-photos/slovenia.jpeg" },
+                "Somalia": { visited: false, story: "" },
+                "South Africa": { visited: true, story: "Stopped by on my way to Namibia." },
+                "South Korea": { visited: false, story: "" },
+                "South Sudan": { visited: false, story: "" },
+                "Spain": { visited: true, story: "Gaudi cooked with Sagrada Familia. Best cheese I've ever had from Montserrat .", photo: "travel-photos/spain.jpeg" },
+                "Sri Lanka": { visited: false, story: "" },
+                "Sudan": { visited: false, story: "" },
+                "Suriname": { visited: false, story: "" },
+                "Sweden": { visited: false, story: "" },
+                "Switzerland": { visited: false, story: "" },
+                "Syria": { visited: false, story: "" },
+                "Taiwan": { visited: false, story: "" },
+                "Tajikistan": { visited: false, story: "" },
+                "Tanzania": { visited: true, story: "Serengeti and Kilimanjaro.", photo: "travel-photos/tanzania.jpeg" },
+                "Thailand": { visited: true, story: "Locals showed me the top mango sticky rice street food stand.", photo: "travel-photos/thailand.jpeg" },
+                "Togo": { visited: false, story: "" },
+                "Tunisia": { visited: false, story: "" },
+                "Turkey": { visited: false, story: "" },
+                "Turkmenistan": { visited: false, story: "" },
+                "Uganda": { visited: false, story: "" },
+                "Ukraine": { visited: true, story: "Traveled to Dnepropetrovsk with my grandmother, who ran a charity here for 50 years." },
+                "United Arab Emirates": { visited: false, story: "" },
+                "United Kingdom": { visited: true, story: "Hiked the West Highland Way. If you keep moving the midges won't find you.", photo: "travel-photos/scotland.jpeg" },
+                "Uruguay": { visited: false, story: "" },
+                "Uzbekistan": { visited: false, story: "" },
+                "Venezuela": { visited: false, story: "" },
+                "Vietnam": { visited: true, story: "Lived at Truc Lam, a Buddhist monastery for a week. This was my schedule.", photo: "travel-photos/vietnam.jpeg" },
+                "Yemen": { visited: false, story: "" },
+                "Zambia": { visited: true, story: "Victoria Falls.", photo: "travel-photos/zambia.jpeg" },
+                "Zimbabwe": { visited: true, story: "A baboon got aggressive with us and chased my family across a bridge.", photo: "travel-photos/zimbabwe.jpeg" }
+            },
+            states: {
+                "Alabama": { visited: false, story: "" },
+                "Alaska": { visited: false, story: "" },
+                "Arizona": { visited: true, story: "Interned in Tempe during college, with sandstorms and desert heat." },
+                "Arkansas": { visited: false, story: "" },
+                "California": { visited: true, story: "Moved to California for UC Berkeley and haven't looked back." },
+                "Colorado": { visited: true, story: "Outdoor adventures in the Rockies and Steamboat Springs.", photo: "travel-photos/colorado.jpeg" },
+                "Connecticut": { visited: true, story: "Spent a summer doing research at Yale in New Haven." },
+                "Delaware": { visited: true, story: "Stopped by during a roadtrip South." },
+                "Florida": { visited: true, story: "Sunshine, beaches, and the Everglades.", photo: "travel-photos/florida.jpeg" },
+                "Georgia": { visited: true, story: "Stopped in Savannah to see the bench from Forrest Gump." },
+                "Hawaii": { visited: true, story: "Napali coast, scuba diving with turtles, and Big Monster Sushi Truck.", photo: "travel-photos/hawaii.png" },
+                "Idaho": { visited: false, story: "" },
+                "Illinois": { visited: true, story: "Visited Northwestern for Dillo Day my freshman year." },
+                "Indiana": { visited: false, story: "" },
+                "Iowa": { visited: true, story: "Lived in Iowa for a summer doing research thanks to the generosity of Professor Gordon Buchanan." },
+                "Kansas": { visited: false, story: "" },
+                "Kentucky": { visited: false, story: "" },
+                "Louisiana": { visited: true, story: "Mardi Gras and a swamp tour in 2022.", photo: "travel-photos/louisiana.jpeg" },
+                "Maine": { visited: true, story: "Acadia National Park and Maine lobster in Bar Harbor." },
+                "Maryland": { visited: true, story: "Passed through on my way South." },
+                "Massachusetts": { visited: true, story: "Cape Cod summers can't be beat." },
+                "Michigan": { visited: true, story: "Debate camp at UMich, then came back for a wedding.", photo: "travel-photos/michigan.jpeg" },
+                "Minnesota": { visited: false, story: "" },
+                "Mississippi": { visited: false, story: "" },
+                "Missouri": { visited: false, story: "" },
+                "Montana": { visited: false, story: "" },
+                "Nebraska": { visited: false, story: "" },
+                "Nevada": { visited: true, story: "Desert landscapes and the bright lights of Las Vegas.", photo: "travel-photos/nevada.jpeg" },
+                "New Hampshire": { visited: true, story: "When I was little." },
+                "New Jersey": { visited: true, story: "My grandparents lived in Paramus, where my Dad grew up." },
+                "New Mexico": { visited: false, story: "" },
+                "New York": { visited: true, story: "New York, born and raised." },
+                "North Carolina": { visited: true, story: "Two Duke sisters means two visits for graduation.", photo: "travel-photos/north_carolina.png" },
+                "North Dakota": { visited: false, story: "" },
+                "Ohio": { visited: false, story: "" },
+                "Oklahoma": { visited: false, story: "" },
+                "Oregon": { visited: false, story: "" },
+                "Pennsylvania": { visited: true, story: "Scranton Debate Tournament." },
+                "Puerto Rico": { visited: true, story: "Family vacation.", photo: "travel-photos/puerto_rico.jpeg" },
+                "Rhode Island": { visited: true, story: "Stopped by on my way to Cape Cod." },
+                "South Carolina": { visited: true, story: "Stopped by on my way South." },
+                "South Dakota": { visited: false, story: "" },
+                "Tennessee": { visited: true, story: "Went to Nashville for a healthcare conference.", photo: "travel-photos/tennessee.png" },
+                "Texas": { visited: true, story: "Stopped by on my way to Mexico" },
+                "Utah": { visited: true, story: "Lived here for a month during COVID and got to see all 5 parks.", photo: "travel-photos/utah.jpeg" },
+                "Vermont": { visited: true, story: "Visiting parents' friends as a kid." },
+                "Virginia": { visited: true, story: "Stopped by on my way South." },
+                "Washington": { visited: true, story: "Zoom in and you'll see the baby bear.", photo: "travel-photos/washington.png" },
+                "West Virginia": { visited: false, story: "" },
+                "Wisconsin": { visited: false, story: "" },
+                "Wyoming": { visited: false, story: "" }
+            }
+        };
+        
+        // Load world map data first, then load US states
+        fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+            .then(response => response.json())
+            .then(data => {
+                const countries = topojson.feature(data, data.objects.countries);
+                createMap(countries);
+                
+                // Load US states data after world map is created
+                return fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json');
+            })
+            .then(response => response.json())
+            .then(data => {
+                const states = topojson.feature(data, data.objects.states);
+                addUSStates(states);
+            })
+            .catch(error => {
+                console.error('Error loading map data:', error);
+            });
+        
+        function createMap(countries) {
+            const container = document.getElementById('map-wrapper');
+            const width = 960;
+            const height = 500;
+            
+            // Create SVG with D3
+            const svg = d3.select(container)
+                .append('svg')
+                .attr('id', 'world-map')
+                .attr('viewBox', `0 0 ${width} ${height}`)
+                .attr('preserveAspectRatio', 'xMidYMid meet');
+            
+            // Create projection that fits the entire world
+            const projection = d3.geoMercator()
+                .center([0, 20])
+                .scale(150)
+                .translate([width / 2, height / 2]);
+            
+            const path = d3.geoPath().projection(projection);
+            
+            // Create group first, then add paths to it
+            const g = svg.append('g');
+            
+            // Add countries directly to the group
+            g.selectAll('path')
+                .data(countries.features)
+                .enter()
+                .append('path')
+                .attr('d', path)
+                .attr('class', d => {
+                    const countryName = d.properties.name;
+                    const mappedName = countryNameMap[countryName] || countryName;
+                    if (countryName === 'Singapore') {
+                        console.log('Singapore found on map!', d);
+                    }
+                    return visitedPlaces.countries[mappedName]?.visited ? 'country visited' : 'country';
+                })
+                .attr('data-name', d => {
+                    const mappedName = countryNameMap[d.properties.name] || d.properties.name;
+                    return mappedName;
+                })
+                .on('mouseenter', function(event, d) {
+                    const mappedName = countryNameMap[d.properties.name] || d.properties.name;
+                    showTooltip(event, mappedName);
+                })
+                .on('mousemove', function(event) {
+                    moveTooltip(event);
+                })
+                .on('mouseleave', function() {
+                    hideTooltip();
+                });
+            
+            // Add special marker for Singapore (and other small countries)
+            const smallCountries = [
+                { name: 'Singapore', coords: [103.8198, 1.3521] },
+                { name: 'Andorra', coords: [1.5218, 42.5063] },
+                { name: 'Monaco', coords: [7.4246, 43.7384] },
+                { name: 'Bahrain', coords: [50.5577, 26.0667] }
+            ];
+            
+            smallCountries.forEach(country => {
+                if (visitedPlaces.countries[country.name]?.visited) {
+                    const coords = projection(country.coords);
+                    g.append('circle')
+                        .attr('cx', coords[0])
+                        .attr('cy', coords[1])
+                        .attr('r', 2)
+                        .attr('class', 'country-marker visited')
+                        .attr('data-name', country.name)
+                        .style('fill', '#7a9eb8')
+                        .style('stroke', '#333')
+                        .style('stroke-width', '1')
+                        .style('cursor', 'pointer')
+                        .on('mouseenter', function(event) {
+                            d3.select(this).style('fill', '#5a7e98');
+                            showTooltip(event, country.name);
+                        })
+                        .on('mousemove', function(event) {
+                            moveTooltip(event);
+                        })
+                        .on('mouseleave', function() {
+                            d3.select(this).style('fill', '#7a9eb8');
+                            hideTooltip();
+                        });
+                }
+            });
+            
+            // Zoom behavior - transform only the group
+            const zoom = d3.zoom()
+                .scaleExtent([1, 8])
+                .wheelDelta(event => -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.005))
+                .filter(event => !event.ctrlKey && !event.button)
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                });
+            
+            svg.call(zoom);
+        }
+        
+        function addUSStates(states) {
+            const svg = d3.select('#world-map');
+            const g = svg.select('g');
+            
+            const projection = d3.geoMercator()
+                .center([0, 20])
+                .scale(150)
+                .translate([960 / 2, 500 / 2]);
+            
+            const path = d3.geoPath().projection(projection);
+            
+            // Add US states to the same group
+            g.selectAll('.state')
+                .data(states.features)
+                .enter()
+                .append('path')
+                .attr('d', path)
+                .attr('class', d => {
+                    const stateName = d.properties.name;
+                    return visitedPlaces.states[stateName]?.visited ? 'state visited' : 'state';
+                })
+                .attr('data-name', d => d.properties.name)
+                .on('mouseenter', function(event, d) {
+                    showTooltip(event, d.properties.name, 'states');
+                })
+                .on('mousemove', function(event) {
+                    moveTooltip(event);
+                })
+                .on('mouseleave', function() {
+                    hideTooltip();
+                });
+        }
+        
+        function showTooltip(e, name, type = 'countries') {
+            const tooltip = document.getElementById('tooltip');
+            const place = visitedPlaces[type][name];
+            
+            let content = `<div class="country-name">${name}</div>`;
+            
+            if (place && place.story) {
+                content += `<div class="country-story">${place.story}</div>`;
+            }
+            
+            if (place && place.photo) {
+                content += `<img src="${place.photo}" alt="${name}" class="country-photo" loading="lazy">`;
+            }
+            
+            tooltip.innerHTML = content;
+            tooltip.classList.add('show');
+            moveTooltip(e);
+        }
+        
+        function moveTooltip(e) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.left = (e.clientX + 10) + 'px';
+            tooltip.style.top = (e.clientY + 10) + 'px';
+        }
+        
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.classList.remove('show');
+        }
+        
+        function showStory(name, type) {
+            const place = visitedPlaces[type][name];
+            if (place && place.story) {
+                document.getElementById('story-title').textContent = name;
+                document.getElementById('story-text').textContent = place.story;
+                document.getElementById('story-panel').classList.add('show');
+            }
+        }
+        
+        function closeStory() {
+            document.getElementById('story-panel').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
