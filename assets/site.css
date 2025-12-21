@@ -1,5 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    background: #fafafa;
+    -webkit-font-smoothing: antialiased;
+}
+
 header {
     margin-bottom: 40px;
+}
+
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+}
+
+h1 {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #000;
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.social-links a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.social-links a:not(:last-child)::after {
+    content: "•";
+    color: #ccc;
+    margin-left: 12px;
+}
+
+.social-links a:hover {
+    color: #000;
 }
 
 .header-top {
@@ -37,4 +89,84 @@ nav a.active {
     color: #000;
     border-color: #e5e5e5;
     background: #fff;
+}
+
+.page-title {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+}
+
+.category-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.category {
+    padding: 2px 0;
+}
+
+.category-header {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    color: #2a2a2a;
+    cursor: pointer;
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+    line-height: 1.8;
+}
+
+.category-header:hover {
+    color: #666;
+}
+
+.category-header::before {
+    content: "▸";
+    margin-right: 8px;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+
+.category-header.expanded::before {
+    transform: rotate(90deg);
+}
+
+.category-content {
+    display: none;
+    margin-top: 4px;
+    padding-left: 20px;
+}
+
+.category-content.expanded {
+    display: block;
+}
+
+.list-item {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    color: #2a2a2a;
+    display: flex;
+    align-items: baseline;
+    line-height: 1.35;
+}
+
+.list-item::before {
+    content: "•";
+    color: #999;
+    margin-right: 12px;
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 60px 20px 80px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
 }

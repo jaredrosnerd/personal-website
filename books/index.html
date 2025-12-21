@@ -11,64 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 15px;
-            line-height: 1.7;
-            color: #1a1a1a;
-            background: #fafafa;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        .container {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 80px 24px 120px;
-        }
-        
-        h1 {
-            font-family: 'Crimson Pro', Georgia, serif;
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: #000;
-        }
-        
-        .social-links {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-        }
-        
-        .social-links a {
-            color: #666;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        
-        .social-links a:not(:last-child)::after {
-            content: "•";
-            color: #ccc;
-            margin-left: 12px;
-        }
-        
-        .social-links a:hover {
-            color: #000;
-        }
-        
         .page-title {
-            font-family: 'Crimson Pro', Georgia, serif;
-            font-size: 24px;
-            font-weight: 600;
             margin-bottom: 40px;
-            color: #000;
         }
         
         .section {
@@ -123,14 +67,6 @@
         }
         
         @media (max-width: 640px) {
-            .container {
-                padding: 60px 20px 80px;
-            }
-            
-            h1 {
-                font-size: 28px;
-            }
-            
             .grid {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
