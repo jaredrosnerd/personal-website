@@ -447,9 +447,6 @@
             // Update active nav
             document.querySelectorAll('nav a').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + page) {
-                    link.classList.add('active');
-                }
             });
         });
         
@@ -460,10 +457,15 @@
                 loadPage(page);
             }
             
-            // Set active nav on initial load
+            // Set active nav on initial load (pathname-based)
+            const path = window.location.pathname || '/';
+            const normalizedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
             document.querySelectorAll('nav a').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + page) {
+                const href = link.getAttribute('href');
+                if (href === '/' && (normalizedPath === '/' || normalizedPath === '/index.html')) {
+                    link.classList.add('active');
+                } else if (href && href !== '/' && normalizedPath.startsWith(href)) {
                     link.classList.add('active');
                 }
             });
