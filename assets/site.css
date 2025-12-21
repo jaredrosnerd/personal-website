@@ -20,7 +20,7 @@ header {
 .container {
     max-width: 680px;
     margin: 0 auto;
-    padding: 80px 24px 120px;
+    padding: 40px 24px 120px;
 }
 
 h1 {
@@ -283,7 +283,7 @@ footer {
 
 @media (max-width: 640px) {
     .container {
-        padding: 60px 20px 80px;
+        padding: 52px 20px 80px;
     }
 
     h1 {
