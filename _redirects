@@ -1,8 +1,8 @@
 /books /books.html 200
-/books/ /books.html 200
+/books/ /books 301
 /travel /travel.html 200
-/travel/ /travel.html 200
+/travel/ /travel 301
 /fruits /fruits.html 200
-/fruits/ /fruits.html 200
+/fruits/ /fruits 301
 /meats /meats.html 200
-/meats/ /meats.html 200
+/meats/ /meats 301
