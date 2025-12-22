@@ -46,6 +46,10 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+body:not(.loaded) .container {
+    opacity: 0;
+}
+
 header {
     margin-bottom: 40px;
 }
