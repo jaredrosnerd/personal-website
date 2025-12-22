@@ -2,7 +2,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-display: block;
+    font-display: swap;
     src: url('/assets/fonts/inter-400.woff2') format('woff2');
 }
 
@@ -10,7 +10,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-display: block;
+    font-display: swap;
     src: url('/assets/fonts/inter-500.woff2') format('woff2');
 }
 
@@ -18,7 +18,7 @@
     font-family: 'Crimson Pro';
     font-style: normal;
     font-weight: 400;
-    font-display: block;
+    font-display: swap;
     src: url('/assets/fonts/crimson-pro-400.woff2') format('woff2');
 }
 
@@ -26,7 +26,7 @@
     font-family: 'Crimson Pro';
     font-style: normal;
     font-weight: 600;
-    font-display: block;
+    font-display: swap;
     src: url('/assets/fonts/crimson-pro-600.woff2') format('woff2');
 }
 
@@ -47,7 +47,7 @@ body {
 }
 
 body:not(.loaded) .container {
-    opacity: 0;
+    visibility: hidden;
 }
 
 header {
@@ -58,6 +58,11 @@ header {
     max-width: 680px;
     margin: 0 auto;
     padding: 40px 24px 120px;
+    transition: opacity 0.15s ease-in;
+}
+
+body.loaded .container {
+    opacity: 1;
 }
 
 h1 {
