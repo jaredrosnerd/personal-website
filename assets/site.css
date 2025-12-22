@@ -1,3 +1,35 @@
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('/assets/fonts/inter-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: block;
+    src: url('/assets/fonts/inter-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Crimson Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('/assets/fonts/crimson-pro-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Crimson Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-display: block;
+    src: url('/assets/fonts/crimson-pro-600.woff2') format('woff2');
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,12 +37,13 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     font-size: 15px;
     line-height: 1.7;
     color: #1a1a1a;
     background: #fafafa;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 header {
