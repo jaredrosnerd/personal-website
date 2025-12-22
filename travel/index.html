@@ -447,9 +447,6 @@
                 .attr('class', d => {
                     const countryName = d.properties.name;
                     const mappedName = countryNameMap[countryName] || countryName;
-                    if (countryName === 'Singapore') {
-                        console.log('Singapore found on map!', d);
-                    }
                     return visitedPlaces.countries[mappedName]?.visited ? 'country visited' : 'country';
                 })
                 .attr('data-name', d => {
