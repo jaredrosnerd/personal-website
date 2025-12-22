@@ -1,3 +1,8 @@
+// Redirect trailing slashes (e.g., /books/ → /books) except for root /
+if (window.location.pathname.endsWith('/') && window.location.pathname.length > 1) {
+  window.history.replaceState(null, '', window.location.pathname.slice(0, -1) + window.location.search + window.location.hash);
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname || '/';
   const normalizedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
