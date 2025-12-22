@@ -7,6 +7,8 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/crimson-pro-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://d3js.org/d3.v7.min.js" as="script">
+    <link rel="preload" href="https://unpkg.com/topojson@3" as="script">
     <link rel="stylesheet" href="/assets/site.css">
     <script src="/assets/site.js" defer></script>
     <style>
@@ -205,12 +207,12 @@
                 "Burundi": { visited: false, story: "" },
                 "Cambodia": { visited: true, story: "Ta Prom showed me the futility of man's struggle to build something enduring.", photo: "/travel/travel-photos/cambodia.jpeg" },
                 "Cameroon": { visited: false, story: "" },
-                "Canada": { visited: true, story: "Competed at JMUCC, where we used multi-level caching to optimize an intermodal railyard. Also, le petit-déjeuner est délicieux à Montréal.", photo: "/travel/travel-photos/canada.png" },
+                "Canada": { visited: true, story: "Competed at JMUCC, where we used multi-level caching to optimize an intermodal railyard. Also, le petit-déjeuner est délicieux à Montréal.", photo: "/travel/travel-photos/canada.jpeg" },
                 "Central African Republic": { visited: false, story: "" },
                 "Chad": { visited: false, story: "" },
                 "Chile": { visited: false, story: "" },
                 "China": { visited: false, story: "" },
-                "Colombia": { visited: true, story: "Spent a couple days in the middle of the ocean two hours from Cartegena by boat.", photo: "/travel/travel-photos/colombia.png" },
+                "Colombia": { visited: true, story: "Spent a couple days in the middle of the ocean two hours from Cartegena by boat.", photo: "/travel/travel-photos/colombia.jpeg" },
                 "Costa Rica": { visited: true, story: "Ziplining through the jungle on a Spring Break trip." },
                 "Croatia": { visited: true, story: "Saw more waterfalls in Croatia than in all the rest of the world.", photo: "/travel/travel-photos/croatia.jpeg" },
                 "Cuba": { visited: false, story: "" },
@@ -253,7 +255,7 @@
                 "Jordan": { visited: true, story: "Went sandboarding and got my head stuck in a dune.", photo: "/travel/travel-photos/jordan.jpeg" },
                 "Kazakhstan": { visited: false, story: "" },
                 "Kenya": { visited: true, story: "Visited friends in Nairobi.", photo: "/travel/travel-photos/kenya.jpeg" },
-                "Kosovo": { visited: true, story: "Bill Clinton is the national hero of Kosovo.", photo: "/travel/travel-photos/kosovo.png" },
+                "Kosovo": { visited: true, story: "Bill Clinton is the national hero of Kosovo.", photo: "/travel/travel-photos/kosovo.jpeg" },
                 "Kuwait": { visited: false, story: "" },
                 "Kyrgyzstan": { visited: false, story: "" },
                 "Laos": { visited: true, story: "Lived in this treehouse for a couple days. Luang Prabong might be my favorite town ever.", photo: "/travel/travel-photos/laos.jpeg" },
@@ -286,7 +288,7 @@
                 "Niger": { visited: false, story: "" },
                 "Nigeria": { visited: false, story: "" },
                 "North Korea": { visited: false, story: "" },
-                "North Macedonia": { visited: true, story: "Encountered a horse and dog duo during a crazy Matka escapade.", photo: "/travel/travel-photos/north_macedonia.png" },
+                "North Macedonia": { visited: true, story: "Encountered a horse and dog duo during a crazy Matka escapade.", photo: "/travel/travel-photos/north_macedonia.jpeg" },
                 "Norway": { visited: false, story: "" },
                 "Oman": { visited: false, story: "" },
                 "Pakistan": { visited: false, story: "" },
@@ -351,7 +353,7 @@
                 "Delaware": { visited: true, story: "Stopped by during a roadtrip South." },
                 "Florida": { visited: true, story: "Sunshine, beaches, and the Everglades.", photo: "/travel/travel-photos/florida.jpeg" },
                 "Georgia": { visited: true, story: "Stopped in Savannah to see the bench from Forrest Gump." },
-                "Hawaii": { visited: true, story: "Napali coast, scuba diving with turtles, and Big Monster Sushi Truck.", photo: "/travel/travel-photos/hawaii.png" },
+                "Hawaii": { visited: true, story: "Napali coast, scuba diving with turtles, and Big Monster Sushi Truck.", photo: "/travel/travel-photos/hawaii.jpeg" },
                 "Idaho": { visited: false, story: "" },
                 "Illinois": { visited: true, story: "Visited Northwestern for Dillo Day my freshman year." },
                 "Indiana": { visited: false, story: "" },
@@ -373,7 +375,7 @@
                 "New Jersey": { visited: true, story: "My grandparents lived in Paramus, where my Dad grew up." },
                 "New Mexico": { visited: false, story: "" },
                 "New York": { visited: true, story: "New York, born and raised." },
-                "North Carolina": { visited: true, story: "Two Duke sisters means two visits for graduation.", photo: "/travel/travel-photos/north_carolina.png" },
+                "North Carolina": { visited: true, story: "Two Duke sisters means two visits for graduation.", photo: "/travel/travel-photos/north_carolina.jpeg" },
                 "North Dakota": { visited: false, story: "" },
                 "Ohio": { visited: false, story: "" },
                 "Oklahoma": { visited: false, story: "" },
@@ -383,12 +385,12 @@
                 "Rhode Island": { visited: true, story: "Stopped by on my way to Cape Cod." },
                 "South Carolina": { visited: true, story: "Stopped by on my way South." },
                 "South Dakota": { visited: false, story: "" },
-                "Tennessee": { visited: true, story: "Went to Nashville for a healthcare conference.", photo: "/travel/travel-photos/tennessee.png" },
+                "Tennessee": { visited: true, story: "Went to Nashville for a healthcare conference.", photo: "/travel/travel-photos/tennessee.jpeg" },
                 "Texas": { visited: true, story: "Stopped by on my way to Mexico" },
                 "Utah": { visited: true, story: "Lived here for a month during COVID and got to see all 5 parks.", photo: "/travel/travel-photos/utah.jpeg" },
                 "Vermont": { visited: true, story: "Visiting parents' friends as a kid." },
                 "Virginia": { visited: true, story: "Stopped by on my way South." },
-                "Washington": { visited: true, story: "Zoom in and you'll see the baby bear.", photo: "/travel/travel-photos/washington.png" },
+                "Washington": { visited: true, story: "Zoom in and you'll see the baby bear.", photo: "/travel/travel-photos/washington.jpeg" },
                 "West Virginia": { visited: false, story: "" },
                 "Wisconsin": { visited: false, story: "" },
                 "Wyoming": { visited: false, story: "" }
@@ -398,19 +400,16 @@
         // Store projection globally so both world map and US states use the same one
         let globalProjection;
         
-        // Load world map data first, then load US states
-        fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-            .then(response => response.json())
-            .then(data => {
-                const countries = topojson.feature(data, data.objects.countries);
+        // Load world map and US states data in parallel
+        Promise.all([
+            fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json()),
+            fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(r => r.json())
+        ])
+            .then(([worldData, statesData]) => {
+                const countries = topojson.feature(worldData, worldData.objects.countries);
                 createMap(countries);
                 
-                // Load US states data after world map is created
-                return fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json');
-            })
-            .then(response => response.json())
-            .then(data => {
-                const states = topojson.feature(data, data.objects.states);
+                const states = topojson.feature(statesData, statesData.objects.states);
                 addUSStates(states);
             })
             .catch(error => {

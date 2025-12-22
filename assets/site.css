@@ -46,23 +46,21 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-body:not(.loaded) .container {
-    visibility: hidden;
-}
-
-header {
-    margin-bottom: 40px;
-}
-
 .container {
     max-width: 680px;
     margin: 0 auto;
     padding: 40px 24px 120px;
-    transition: opacity 0.15s ease-in;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
 }
 
 body.loaded .container {
     opacity: 1;
+}
+
+header {
+    margin-bottom: 40px;
+    min-height: 88px;
 }
 
 h1 {
