@@ -56,9 +56,46 @@
             margin-top: 4px;
         }
         
+        .hover-image-trigger {
+            cursor: pointer;
+            position: relative;
+            text-decoration: underline;
+            text-decoration-color: #ccc;
+            transition: text-decoration-color 0.2s ease;
+        }
+        
+        .hover-image-trigger:hover {
+            text-decoration-color: #1a1a1a;
+        }
+        
+        .hover-image-popup {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .hover-image-popup.visible {
+            opacity: 1;
+        }
+        
+        .hover-image-popup img {
+            max-width: 300px;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: block;
+        }
+        
         @media (max-width: 640px) {
             .intro {
                 font-size: 17px;
+            }
+            
+            .hover-image-popup img {
+                max-width: 200px;
+                max-height: 300px;
             }
         }
     </style>
@@ -80,7 +117,7 @@
                 Along the way, I've enjoyed a few side quests:
                 <ul style="margin-top: 12px; padding-left: 20px;">
                     <li style="margin-bottom: 0px;">Volunteering with the San Francisco Suicide Prevention Hotline.</li>
-                    <li style="margin-bottom: 0px;">Briefly appearing as an extra in <i>Oppenheimer</i>.</li>
+                    <li style="margin-bottom: 0px;">Briefly appearing as an extra in <span class="hover-image-trigger" data-image="/oppenheimer.png"><i>Oppenheimer</i></span>.</li>
                     <li style="margin-bottom: 0px;">Organizing a 300-person “Quarter Life Prom” at the Exploratorium.</li>
                     <!--<li style="margin-bottom: 0px;">Lived at a monastery for a week, which requried 3am wake-ups and 6 hours of meditation per day.</li>-->
                     <li style="margin-bottom: 0px;">Trying as many new <a href="/fruits" style="color: #1a1a1a; text-decoration: underline; text-decoration-color: #ccc; transition: text-decoration-color 0.2s ease;">fruits</a> and <a href="/meats" style="color: #1a1a1a; text-decoration: underline; text-decoration-color: #ccc; transition: text-decoration-color 0.2s ease;">meats</a> as possible.</li>
@@ -90,6 +127,59 @@
     </div>
     
     <script>
+        // Hover image functionality
+        let hoverImagePopup = null;
+        
+        function initHoverImages() {
+            // Create popup element if it doesn't exist
+            if (!hoverImagePopup) {
+                hoverImagePopup = document.createElement('div');
+                hoverImagePopup.className = 'hover-image-popup';
+                document.body.appendChild(hoverImagePopup);
+            }
+            
+            // Add event listeners to all hover triggers
+            document.querySelectorAll('.hover-image-trigger').forEach(trigger => {
+                trigger.addEventListener('mouseenter', function(e) {
+                    const imageSrc = this.dataset.image;
+                    if (imageSrc) {
+                        hoverImagePopup.innerHTML = `<img src="${imageSrc}" alt="Hover image">`;
+                        hoverImagePopup.classList.add('visible');
+                        updatePopupPosition(e);
+                    }
+                });
+                
+                trigger.addEventListener('mousemove', updatePopupPosition);
+                
+                trigger.addEventListener('mouseleave', function() {
+                    hoverImagePopup.classList.remove('visible');
+                });
+            });
+        }
+        
+        function updatePopupPosition(e) {
+            if (!hoverImagePopup) return;
+            
+            const offset = 20;
+            let x = e.clientX + offset;
+            let y = e.clientY + offset;
+            
+            // Adjust position if popup would go off screen
+            const rect = hoverImagePopup.getBoundingClientRect();
+            if (x + rect.width > window.innerWidth) {
+                x = e.clientX - rect.width - offset;
+            }
+            if (y + rect.height > window.innerHeight) {
+                y = e.clientY - rect.height - offset;
+            }
+            
+            hoverImagePopup.style.left = x + 'px';
+            hoverImagePopup.style.top = y + 'px';
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initHoverImages);
+        
         // Store original home content
         const homeContent = document.querySelector('main').innerHTML;
         
