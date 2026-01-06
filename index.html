@@ -138,6 +138,15 @@
                 document.body.appendChild(hoverImagePopup);
             }
             
+            // Preload hover images
+            document.querySelectorAll('.hover-image-trigger').forEach(trigger => {
+                const imageSrc = trigger.dataset.image;
+                if (imageSrc) {
+                    const img = new Image();
+                    img.src = imageSrc;
+                }
+            });
+            
             // Add event listeners to all hover triggers
             document.querySelectorAll('.hover-image-trigger').forEach(trigger => {
                 trigger.addEventListener('mouseenter', function(e) {
