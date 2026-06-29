@@ -17,6 +17,7 @@ const headerHTML = `
     <a href="/">Home</a>
     <a href="/travel">Travel</a>
     <a href="/books">Books & Movies</a>
+    <a href="/links">Links</a>
 </nav>
 `;
 
