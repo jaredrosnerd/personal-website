@@ -26,7 +26,6 @@ function loadHeader() {
   const headerElement = document.querySelector('header');
   
   if (!headerElement) {
-    document.body.classList.add('loaded');
     return;
   }
 
@@ -35,8 +34,6 @@ function loadHeader() {
   // Set active nav link after header is loaded
   setActiveNavLink();
   
-  // Show page content now that header is loaded
-  document.body.classList.add('loaded');
 }
 
 // Set active navigation link based on current path
@@ -69,16 +66,3 @@ function setActiveNavLink() {
 window.addEventListener('DOMContentLoaded', () => {
   loadHeader();
 });
-
-window.toggleCategory = function (header) {
-  const content = header.nextElementSibling;
-  const isExpanded = content.classList.contains('expanded');
-
-  if (isExpanded) {
-    content.classList.remove('expanded');
-    header.classList.remove('expanded');
-  } else {
-    content.classList.add('expanded');
-    header.classList.add('expanded');
-  }
-};
